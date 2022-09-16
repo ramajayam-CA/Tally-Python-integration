@@ -1,0 +1,12 @@
+import pyodbc
+pyodbc.drivers()
+import pandas as pd
+server = 'localhost,9000'
+#database = 'database_name' # enter database name
+cnxn = pyodbc.connect('DRIVER={Tally ODBC Driver64};SERVER='+server+';Trusted_Connection=yes;')
+cursor = cnxn.cursor()
+# select command
+query = ''' Select $Name from Ledger'''
+data = pd.read_sql(query, cnxn)
+data.head()
+data.to_csv('file_name1.csv')
